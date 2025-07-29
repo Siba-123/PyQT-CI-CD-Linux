@@ -5,6 +5,10 @@ on:
     tags:
       - 'v*'  # Only triggers when you push tags like v1.0.0
 
+
+permissions:
+  contents: write 
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,7 +35,7 @@ jobs:
           pyinstaller --onefile main.py
 
       - name: Create GitHub Release and Upload Binary
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v4
         with:
           files: dist/main
         env:
