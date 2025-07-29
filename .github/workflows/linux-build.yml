@@ -32,7 +32,7 @@ jobs:
           pyinstaller --onefile main.py
 
       - name: Upload built app artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: PyQt-Linux-Executable
           path: dist/main
