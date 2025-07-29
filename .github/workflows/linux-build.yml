@@ -1,10 +1,9 @@
-name: Build PyQt App on Linux
+name: Build and Release PyQt App on Linux
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    tags:
+      - 'v*'  # Only triggers when you push tags like v1.0.0
 
 jobs:
   build:
@@ -31,8 +30,9 @@ jobs:
         run: |
           pyinstaller --onefile main.py
 
-      - name: Upload built app artifact
-        uses: actions/upload-artifact@v4
+      - name: Create GitHub Release and Upload Binary
+        uses: softprops/action-gh-release@v2
         with:
-          name: PyQt-Linux-Executable
-          path: dist/main
+          files: dist/main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
