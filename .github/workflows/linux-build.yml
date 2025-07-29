@@ -40,3 +40,9 @@ jobs:
           files: dist/main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PyQt-Linux-Binary
+          path: dist/main
